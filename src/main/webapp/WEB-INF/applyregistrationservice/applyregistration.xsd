@@ -29,6 +29,33 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:complexType name="ResultList">
+        <xs:sequence>
+            <xs:element
+                    name="ComparedMember"
+                    type="han:ComparedMember"
+                    minOccurs="0"
+                    maxOccurs="unbounded"
+            />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ComparedMember">
+        <xs:all>
+            <xs:element name="id"
+                     type="xs:long"
+                     minOccurs="1"
+                     maxOccurs="1"/>
+            <xs:element name="spotifyMatchCount"
+                     type="xs:integer"
+                     minOccurs="1"
+                     maxOccurs="1"/>
+            <xs:element name="youtubeMatchCount"
+                     type="xs:integer"
+                     minOccurs="1"
+                     maxOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
 
     <xs:element name="ApplyRegistrationRequest">
         <xs:complexType>
@@ -42,6 +69,24 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="registration" type="han:Registration" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CalculateRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long" minOccurs="1"
+                         maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CalculateResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="resultList" type="han:ResultList"
+                         minOccurs="1" maxOccurs="1"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
