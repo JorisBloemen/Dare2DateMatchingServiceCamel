@@ -19,3 +19,7 @@ ApplyRegistrationResponse
 Registration
 User
 Creditcard
+CalculateRequest
+CalculateResponse
+ResultList
+ComparedMember

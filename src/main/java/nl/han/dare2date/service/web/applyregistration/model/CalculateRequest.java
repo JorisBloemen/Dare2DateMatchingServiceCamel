@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="registration" type="{http://www.han.nl/schemas/messages}Registration"/>
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,36 +29,28 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "registration"
+    "id"
 })
-@XmlRootElement(name = "ApplyRegistrationRequest", namespace = "http://www.han.nl/schemas/messages")
-public class ApplyRegistrationRequest {
+@XmlRootElement(name = "CalculateRequest", namespace = "http://www.han.nl/schemas/messages")
+public class CalculateRequest {
 
-    @XmlElement(namespace = "http://www.han.nl/schemas/messages", required = true)
-    protected Registration registration;
+    @XmlElement(namespace = "http://www.han.nl/schemas/messages")
+    protected long id;
 
     /**
-     * Gets the value of the registration property.
+     * Gets the value of the id property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Registration }
-     *     
      */
-    public Registration getRegistration() {
-        return registration;
+    public long getId() {
+        return id;
     }
 
     /**
-     * Sets the value of the registration property.
+     * Sets the value of the id property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Registration }
-     *     
      */
-    public void setRegistration(Registration value) {
-        this.registration = value;
+    public void setId(long value) {
+        this.id = value;
     }
 
 }
