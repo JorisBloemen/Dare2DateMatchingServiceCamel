@@ -1,10 +1,12 @@
 package nl.han.dare2date.webservice.dao;
 
 import nl.han.dare2date.webservice.model.Member;
+import org.hibernate.jpa.internal.EntityManagerFactoryImpl;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class MemberDao implements IMemberDao{
     @Transactional
     @Override
     public Member getMember(long id){
+        this.emf = Persistence.createEntityManagerFactory("calculator");
         return emf.createEntityManager().find(Member.class, id);
     }
 

@@ -3,8 +3,10 @@ package nl.han.dare2date.webservice.services;
 import nl.han.dare2date.service.web.applyregistration.model.ComparedMember;
 import nl.han.dare2date.service.web.applyregistration.model.ResultList;
 import nl.han.dare2date.webservice.dao.IMemberDao;
+import nl.han.dare2date.webservice.dao.MemberDao;
 import nl.han.dare2date.webservice.model.Member;
-import org.springframework.beans.factory.annotation.Autowired;
+import nl.han.dare2date.webservice.services.spotifyMatchingService.SpotifyMatchingService;
+import nl.han.dare2date.webservice.services.youtubeMatchingService.YoutubeMatchingService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -15,19 +17,22 @@ import java.util.List;
 @Service
 public class MatchService implements IMatchService{
 
-    @Autowired
     private IAPIMatchingService spotifyMatchingService;
 
-    @Autowired
     private IAPIMatchingService youtubeMatchingService;
 
-    @Autowired
-    private IMemberDao memberDoa;
+    private IMemberDao memberDao;
+
+    public MatchService(){
+        this.spotifyMatchingService = new SpotifyMatchingService();
+        this.youtubeMatchingService = new YoutubeMatchingService();
+        this.memberDao = new MemberDao();
+    }
 
     @Override
     public ResultList getMatches(Long id) {
-        Member member = this.memberDoa.getMember(id);
-        List<Member> otherMembers = this.memberDoa.getOtherMembers(id);
+        Member member = this.memberDao.getMember(id);
+        List<Member> otherMembers = this.memberDao.getOtherMembers(id);
 
         ArrayList<String> possibleSpotifyMatches = new ArrayList<String>();
         ArrayList<String> possibleYoutubeMatches = new ArrayList<String>();

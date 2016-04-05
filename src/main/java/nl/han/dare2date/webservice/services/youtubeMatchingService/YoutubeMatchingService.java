@@ -13,7 +13,9 @@ public class YoutubeMatchingService implements IAPIMatchingService {
     @Autowired
     private IYoutubeConnector youtubeConnector;
 
-    public YoutubeMatchingService(){}
+    public YoutubeMatchingService(){
+        this.youtubeConnector = new YoutubeConnector();
+    }
 
     public YoutubeMatchingService(IYoutubeConnector youtubeConnector){
         this.youtubeConnector = youtubeConnector;

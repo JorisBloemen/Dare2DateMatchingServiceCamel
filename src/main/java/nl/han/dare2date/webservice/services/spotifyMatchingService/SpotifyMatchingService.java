@@ -13,7 +13,9 @@ public class SpotifyMatchingService implements IAPIMatchingService{
     @Autowired
     private ISpotifyConnector spotifyConnector;
 
-    public SpotifyMatchingService(){}
+    public SpotifyMatchingService(){
+        this.spotifyConnector = new SpotifyConnector();
+    }
 
     public SpotifyMatchingService(ISpotifyConnector spotifyConnector){
         this.spotifyConnector = spotifyConnector;
