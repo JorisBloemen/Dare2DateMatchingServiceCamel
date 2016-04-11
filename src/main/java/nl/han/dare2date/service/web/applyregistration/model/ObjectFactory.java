@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the nl.han.dare2date.service.web.applyregistration.model package. 
+ * generated in the mypackage package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -23,26 +23,10 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: nl.han.dare2date.service.web.applyregistration.model
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: mypackage
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link ApplyRegistrationRequest }
-     * 
-     */
-    public ApplyRegistrationRequest createApplyRegistrationRequest() {
-        return new ApplyRegistrationRequest();
-    }
-
-    /**
-     * Create an instance of {@link Registration }
-     * 
-     */
-    public Registration createRegistration() {
-        return new Registration();
     }
 
     /**
@@ -67,30 +51,6 @@ public class ObjectFactory {
      */
     public ResultList createResultList() {
         return new ResultList();
-    }
-
-    /**
-     * Create an instance of {@link ApplyRegistrationResponse }
-     * 
-     */
-    public ApplyRegistrationResponse createApplyRegistrationResponse() {
-        return new ApplyRegistrationResponse();
-    }
-
-    /**
-     * Create an instance of {@link User }
-     * 
-     */
-    public User createUser() {
-        return new User();
-    }
-
-    /**
-     * Create an instance of {@link Creditcard }
-     * 
-     */
-    public Creditcard createCreditcard() {
-        return new Creditcard();
     }
 
     /**

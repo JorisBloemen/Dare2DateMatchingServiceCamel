@@ -16,23 +16,13 @@
  */
 package nl.han.dare2date.service.web.applyregistration;
 
-import nl.han.dare2date.service.web.applyregistration.model.ApplyRegistrationRequest;
-import nl.han.dare2date.service.web.applyregistration.model.ApplyRegistrationResponse;
 import nl.han.dare2date.service.web.applyregistration.model.CalculateRequest;
-import nl.han.dare2date.service.web.applyregistration.model.CalculateResponse;
-import nl.han.dare2date.webservice.services.IMatchService;
-import nl.han.dare2date.webservice.services.MatchService;
-import org.apache.camel.Exchange;
-import org.apache.camel.LoggingLevel;
-import org.apache.camel.Processor;
+import nl.han.dare2date.webservice.dao.MemberDaoProcessor;
+import nl.han.dare2date.webservice.services.MatchProcessor;
+import nl.han.dare2date.webservice.services.spotifyMatchingService.SpotifyProcessor;
+import nl.han.dare2date.webservice.services.youtubeMatchingService.YoutubeProcessor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.converter.jaxb.JaxbDataFormat;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.ws.server.endpoint.annotation.Endpoint;
-import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
-import org.springframework.ws.server.endpoint.annotation.RequestPayload;
-import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 /**
  * When you run this route, messages can be obtained from two sources:
@@ -50,33 +40,14 @@ public class ApplyRegistrationRoute extends RouteBuilder {
 
         from("file://inbox")
                 .from("spring-ws:rootqname:{http://www.han.nl/schemas/messages}CalculateRequest?endpointMapping=#applyRegistrationEndpointMapping")
-                    .unmarshal(jaxb).
-                            log("${body}").
-                                process(new Match())
+                    .unmarshal(jaxb)
+                            .log("${body}")
+                                .process(new MemberDaoProcessor())
+//                                .parallelProcessing()
+                                .process(new SpotifyProcessor())
+                                .process(new YoutubeProcessor())
+//                                .end()
+                                .process(new MatchProcessor())
                                     .marshal(jaxb);
     }
-
-    private static final class Echo implements Processor {
-        public void process(Exchange exchange) throws Exception {
-            ApplyRegistrationResponse registrationResponse = new ApplyRegistrationResponse();
-            registrationResponse.setRegistration(exchange.getIn().getBody(ApplyRegistrationRequest.class).getRegistration());
-            exchange.getOut().setBody(registrationResponse);
-        }
-    }
-
-    private static final class Match implements Processor{
-
-        private IMatchService matchService;
-
-        public Match(){
-            this.matchService = new MatchService();
-        }
-
-        public void process(Exchange exchange) throws Exception {
-            CalculateResponse resp = new CalculateResponse();
-            resp.setResultList(this.matchService.getMatches(exchange.getIn().getBody(CalculateRequest.class).getId()));
-            exchange.getOut().setBody(resp);
-        }
-    }
-
 }

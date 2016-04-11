@@ -1,7 +1,6 @@
 package nl.han.dare2date.webservice.dao;
 
 import nl.han.dare2date.webservice.model.Member;
-import org.hibernate.jpa.internal.EntityManagerFactoryImpl;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class MemberDao implements IMemberDao{
+public class MemberDao implements IMemberDao {
 
     @PersistenceContext
     private EntityManagerFactory emf;
